@@ -1,2 +1,5 @@
 .idea
 Pipfile.lock
+.gdb_history
+peda*
+core
