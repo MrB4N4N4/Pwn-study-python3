@@ -3,6 +3,4 @@ Pipfile.lock
 .gdb_history
 peda*
 core
-.gitignore
-# change key "$ git remote set-url https://MrB4N4N4:<token>@<repository>
-# key = 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
+secret*
