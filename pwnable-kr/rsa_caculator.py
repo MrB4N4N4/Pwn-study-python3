@@ -22,8 +22,6 @@ Exploit plan
     v1 < v5     &&
     v2 < v5     &&
     e * d % v5 != 1
-    
-
 """
 
 
