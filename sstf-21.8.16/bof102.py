@@ -2,7 +2,6 @@ from pwn import *
 
 """
 name < "/bin/sh"
-select id from users where id='{$_GET["id"]}' and pw='{$_GET["pw"]}'
 ebp-0x10 > input
 ret < system
 ret + 4 < stuff
