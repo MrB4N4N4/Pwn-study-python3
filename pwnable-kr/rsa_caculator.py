@@ -23,9 +23,7 @@ Execute "4.help"
     use FSB, help -> g_pbuf
         0x602518 : 0x602560
 3. RSA_encrypt(shellcode)
-4. Select "4.help"
-
-    
+4. Select "4.help"    
 """
 def rsa_encrypt(txt):
     p.recvuntil(b"> ")

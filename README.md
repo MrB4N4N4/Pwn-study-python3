@@ -1,3 +1,24 @@
 # Pwn-study-python3
 
-21.08.13 Vmware border issue???? - Revert to last snapshot
+### Form of files.
+
+```python
+from pwn import *
+
+"""Bugs & Ideas
+[Protections]
+
+[Bug]
+
+[Adress]
+
+[Exploit]
+
+"""
+
+p = remote("pwnable.kr", port)
+...
+...
+...
+```
+To organize thoughts, fill out `Bugs & Ideas`
