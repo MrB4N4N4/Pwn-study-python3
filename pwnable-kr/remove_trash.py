@@ -1,14 +1,18 @@
 #!/usr/bin/env pyton
-
 import os
+
 
 def exec_bash(cmd):
     for c in cmd:
-        os.system(c)
+        try:
+            os.system(c)
+        except e:
+            pass
 
-cmd = [
+
+command = [
     "rm .gdb_history",
     "rm core",
     "rm peda*",
 ]
-exec_bash(cmd)
+exec_bash(command)

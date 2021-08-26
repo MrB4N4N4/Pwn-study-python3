@@ -10,7 +10,7 @@ from pwn import *
 
 [Bug]
 
-[Adress]
+[Address]
 
 [Exploit]
 
