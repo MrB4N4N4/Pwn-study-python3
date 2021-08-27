@@ -7,6 +7,10 @@ from pwn import *
 [Bug]
     mem_arr[256] - always empty
     write_note.gets() - over flow
+    select_menu > recursive > pile stack infinitely
+    
+    ToDo
+    leak stack
     
 [Address]
 
