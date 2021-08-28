@@ -1,7 +1,7 @@
 from pwn import *
 
 """
-0x31337 >> hacker menu
+0x31337(201527) >> hacker menu
 [Protections]
 -NX, Partial RELRO
 [Bug]
@@ -11,6 +11,8 @@ from pwn import *
     
     ToDo
     leak stack
+    
+    mmap_s() - fd used after closed.
     
 [Address]
 
