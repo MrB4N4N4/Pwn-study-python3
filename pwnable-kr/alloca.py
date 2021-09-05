@@ -4,8 +4,11 @@ from pwn import *
 [Protections]
  - partial RELRO, NX
 [Info]
- - base_esp : ebp-0x8
- - size : (input + 0x4 + 0xf + 0xf) / 0x10 * 0x10
+ - esp_m = ((size_input + 34) // 16) * 16
+ - buffer = (esp+0xf) >> 4 << 4
+ - canary = buffer + size_input
+ - check_canary_ebp(ebp_c) = buffer - 0x18
+ - canary insert = check_canary_ebp-0x14, check_canary_ebp-0x10
 [Bug]
  - buffer size input : not filtering negative number
 [Address]
@@ -13,7 +16,6 @@ from pwn import *
  - buffer_size : 0x804a048
  - callme : 0x80485ab
  - g_canary : 0x804a04c
- - canary(nagative) : buffer(esp+n) - input, n = input + 34 / 0x10 * 0x10
  
 [Exploit]
  ?? awesome negative integer of size might input my canary(callme) in to stack.
